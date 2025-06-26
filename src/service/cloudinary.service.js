@@ -3,7 +3,7 @@ import cloudinary from '../utils/cloudinary.js';
 
 export const uploadToCloudinary = async (localFilePath, folder, resourceType='auto') => {
   if (!localFilePath) return null;
-  console.log(localFilePath , resourceType);
+  
 
 
   const result = await cloudinary.uploader.upload(localFilePath, {

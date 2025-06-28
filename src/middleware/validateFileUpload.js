@@ -12,7 +12,7 @@ export const validateFileUpload = (req, res, next) => {
   }
 
   if (errors.length > 0) {
-    return apiError(400, 'Invalid file upload', errors);
+    return res.status(400).json(new apiError(400, 'Invalid file upload', errors));
   }
 
   next();

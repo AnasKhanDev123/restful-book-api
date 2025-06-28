@@ -13,3 +13,22 @@ export const getBooks = asyncHandler(async (req, res) => {
 
   return res.status(200).json(new ApiResponse(200, { books }, 'Book founded successfully'));
 });
+
+export const getBookById = asyncHandler(async (req, res) => {
+  const book = await bookService.getBookById(req.params.bookId);
+
+  return res.status(200).json(new ApiResponse(200, { book }, 'book found'));
+});
+
+export const deleteBookById = asyncHandler(async (req, res) => {
+  const book = await bookService.deleleBookService(req.params.bookId);
+
+  return res.status(200).json(new ApiResponse(200, { book }, 'Book deleted successfully'));
+});
+
+export const updateBookById = asyncHandler(async (req, res) => {
+  const { bookId } = req.params;
+  const book = await bookService.updateBookService(req.files, bookId, req.body);
+
+  return res.status(200).json(new ApiResponse(200, { book }, 'Book updated successfully'));
+});

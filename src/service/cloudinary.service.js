@@ -9,7 +9,7 @@ export const uploadToCloudinary = async (localFilePath, folder, resourceType = '
     folder,
   });
 
-  console.log(result);
+  
 
   if (!result.secure_url) {
     throw new ApiError(400, 'failed to upload image to cloudinary');
@@ -23,7 +23,7 @@ export const uploadToCloudinary = async (localFilePath, folder, resourceType = '
 
 export const deleteFromCloudinary = async (publicId , resourceType) => {
   if (!publicId) return null;
-  console.log(publicId);
+  
 
  const result = await cloudinary.uploader.destroy(publicId , {
   resource_type: resourceType

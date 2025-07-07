@@ -20,6 +20,10 @@ const userSchema = new Schema(
       required: true,
       select: false,
     },
+    refreshToken: {
+      type: String,
+      select: false,
+    },
   },
   { timestamps: true }
 );
@@ -38,10 +42,15 @@ userSchema.methods.comparePassword = async function (password) {
 userSchema.methods.getJwtToken = function () {
   const payLoads = {
     id: this._id,
-    email: this.email,
-    username: this.username,
   };
   return jwt.sign(payLoads, process.env.JWT_SECRET_KEY, { expiresIn: '1d' });
+};
+
+userSchema.methods.generateRefreshToken = function () {
+  const payLoads = {
+    id: this._id,
+  };
+  return jwt.sign(payLoads, process.env.JWT_SECRET_KEY, { expiresIn: '7d' });
 };
 
 export default model('User', userSchema);
